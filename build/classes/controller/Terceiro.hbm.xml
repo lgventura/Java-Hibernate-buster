@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 17/11/2017 01:21:44 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="controller.Terceiro" table="terceiro" catalog="projeto" optimistic-lock="version">
+        <id name="idTerceiro" type="java.lang.Integer">
+            <column name="id_terceiro" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="pessoa" class="controller.Pessoa" fetch="select">
+            <column name="pessoa_id_pessoa" not-null="true" />
+        </many-to-one>
+        <property name="especialidade" type="string">
+            <column name="especialidade" length="45" not-null="true" />
+        </property>
+        <property name="descricaoFormacao" type="string">
+            <column name="descricao_formacao" />
+        </property>
+        <property name="status" type="java.lang.Integer">
+            <column name="status" />
+        </property>
+        <set name="servicoTerceiros" table="servico_terceiro" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="terceiro_id" not-null="true" />
+            </key>
+            <one-to-many class="controller.ServicoTerceiro" />
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 17/11/2017 01:21:44 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="controller.TblAssosiativaServicos" table="tbl_assosiativa_servicos" catalog="projeto" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="colaborador" class="controller.Colaborador" fetch="select">
+            <column name="colaborador_id_colaborador" not-null="true" />
+        </many-to-one>
+        <many-to-one name="servico" class="controller.Servico" fetch="select">
+            <column name="servico_id_servico" not-null="true" />
+        </many-to-one>
+        <many-to-one name="tipoServico" class="controller.TipoServico" fetch="select">
+            <column name="tipo_servico_id_tipo" not-null="true" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 17/11/2017 01:21:44 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="controller.ProdutosCasa" table="produtos_casa" catalog="projeto" optimistic-lock="version">
+        <id name="idProdCasa" type="java.lang.Integer">
+            <column name="id_prod_casa" />
+            <generator class="identity" />
+        </id>
+        <property name="prodCasa" type="string">
+            <column name="prod_casa" length="45" not-null="true" />
+        </property>
+        <set name="tblAssocProdCasas" table="tbl_assoc_prod_casa" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="produtos_casa_id_prod_casa" not-null="true" />
+            </key>
+            <one-to-many class="controller.TblAssocProdCasa" />
+        </set>
+    </class>
+</hibernate-mapping>

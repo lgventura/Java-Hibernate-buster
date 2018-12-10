@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 17/11/2017 01:21:44 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="controller.ProblemasSaude" table="problemas_saude" catalog="projeto" optimistic-lock="version">
+        <id name="idProblemas" type="java.lang.Integer">
+            <column name="id_problemas" />
+            <generator class="identity" />
+        </id>
+        <property name="tipoProblema" type="string">
+            <column name="tipo_problema" length="45" not-null="true" />
+        </property>
+        <set name="tblAssocSaudes" table="tbl_assoc_saude" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="problemas_saude_id_problemas" not-null="true" />
+            </key>
+            <one-to-many class="controller.TblAssocSaude" />
+        </set>
+    </class>
+</hibernate-mapping>

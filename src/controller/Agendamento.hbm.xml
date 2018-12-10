@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 17/11/2017 01:21:44 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="controller.Agendamento" table="agendamento" catalog="projeto" optimistic-lock="version">
+        <id name="idAgendamento" type="java.lang.Integer">
+            <column name="id_agendamento" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="cliente" class="controller.Cliente" fetch="select">
+            <column name="cliente_id_cliente" not-null="true" />
+        </many-to-one>
+        <many-to-one name="colaborador" class="controller.Colaborador" fetch="select">
+            <column name="colaborador_id_colaborador" />
+        </many-to-one>
+        <many-to-one name="servico" class="controller.Servico" fetch="select">
+            <column name="servico_id_servico" />
+        </many-to-one>
+        <many-to-one name="servicoTerceiro" class="controller.ServicoTerceiro" fetch="select">
+            <column name="servico_terceiro_id" />
+        </many-to-one>
+        <property name="hora" type="string">
+            <column name="hora" length="45" />
+        </property>
+        <property name="data" type="date">
+            <column name="data" length="10" />
+        </property>
+        <property name="transacao" type="java.lang.Integer">
+            <column name="transacao" />
+        </property>
+        <property name="status" type="java.lang.Integer">
+            <column name="status" />
+        </property>
+        <property name="operacao" type="java.lang.Byte">
+            <column name="operacao" />
+        </property>
+        <property name="observacoes" type="string">
+            <column name="observacoes" />
+        </property>
+        <property name="valorTotal" type="java.lang.Double">
+            <column name="valor_total" precision="22" scale="0" />
+        </property>
+        <set name="tblAssocCliAgendas" table="tbl_assoc_cli_agenda" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="agendamento_id_agendamento" not-null="true" />
+            </key>
+            <one-to-many class="controller.TblAssocCliAgenda" />
+        </set>
+    </class>
+</hibernate-mapping>

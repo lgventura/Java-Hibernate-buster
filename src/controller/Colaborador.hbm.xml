@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 17/11/2017 01:21:44 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="controller.Colaborador" table="colaborador" catalog="projeto" optimistic-lock="version">
+        <id name="idColaborador" type="java.lang.Integer">
+            <column name="id_colaborador" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="pessoa" class="controller.Pessoa" fetch="select">
+            <column name="pessoa_id_pessoa" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuarios" class="controller.Usuarios" fetch="select">
+            <column name="usuarios_id_user" not-null="true" />
+        </many-to-one>
+        <property name="idade" type="int">
+            <column name="idade" not-null="true" />
+        </property>
+        <property name="sexo" type="string">
+            <column name="sexo" length="45" />
+        </property>
+        <property name="especialidade" type="string">
+            <column name="especialidade" length="45" not-null="true" />
+        </property>
+        <property name="descricaoFormacao" type="string">
+            <column name="descricao_formacao" />
+        </property>
+        <set name="acessos" table="acesso" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="colaborador_id_colaborador" not-null="true" />
+            </key>
+            <one-to-many class="controller.Acesso" />
+        </set>
+        <set name="agendamentos" table="agendamento" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="colaborador_id_colaborador" />
+            </key>
+            <one-to-many class="controller.Agendamento" />
+        </set>
+        <set name="tblAssosiativaServicoses" table="tbl_assosiativa_servicos" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="colaborador_id_colaborador" not-null="true" />
+            </key>
+            <one-to-many class="controller.TblAssosiativaServicos" />
+        </set>
+    </class>
+</hibernate-mapping>

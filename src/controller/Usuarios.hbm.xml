@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 17/11/2017 01:21:44 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="controller.Usuarios" table="usuarios" catalog="projeto" optimistic-lock="version">
+        <id name="idUser" type="java.lang.Integer">
+            <column name="id_user" />
+            <generator class="identity" />
+        </id>
+        <property name="usuario" type="string">
+            <column name="usuario" length="15" not-null="true" />
+        </property>
+        <property name="senha" type="string">
+            <column name="senha" length="16" not-null="true" />
+        </property>
+        <property name="tipoDeAcesso" type="string">
+            <column name="tipo_de_acesso" length="40" not-null="true" />
+        </property>
+        <set name="colaboradors" table="colaborador" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuarios_id_user" not-null="true" />
+            </key>
+            <one-to-many class="controller.Colaborador" />
+        </set>
+    </class>
+</hibernate-mapping>

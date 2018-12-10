@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 17/11/2017 01:21:44 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="controller.Ficha" table="ficha" catalog="projeto" optimistic-lock="version">
+        <id name="idFicha" type="java.lang.Integer">
+            <column name="id_ficha" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="cliente" class="controller.Cliente" fetch="select">
+            <column name="cliente_id_cliente" not-null="true" />
+        </many-to-one>
+        <property name="saude" type="byte">
+            <column name="saude" not-null="true" />
+        </property>
+        <property name="SCabelo" type="byte">
+            <column name="s_cabelo" not-null="true" />
+        </property>
+        <property name="SCor" type="byte">
+            <column name="s_cor" not-null="true" />
+        </property>
+        <property name="SProdCasa" type="java.lang.Byte">
+            <column name="s_prod_casa" />
+        </property>
+        <set name="tblAssocSaudes" table="tbl_assoc_saude" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="ficha_id_ficha" not-null="true" />
+            </key>
+            <one-to-many class="controller.TblAssocSaude" />
+        </set>
+        <set name="tblAssocTpCabelos" table="tbl_assoc_tp_cabelo" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="ficha_id_ficha" not-null="true" />
+            </key>
+            <one-to-many class="controller.TblAssocTpCabelo" />
+        </set>
+        <set name="tblAssocCors" table="tbl_assoc_cor" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="ficha_id_ficha" not-null="true" />
+            </key>
+            <one-to-many class="controller.TblAssocCor" />
+        </set>
+        <set name="tblAssocProdCasas" table="tbl_assoc_prod_casa" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="ficha_id_ficha" not-null="true" />
+            </key>
+            <one-to-many class="controller.TblAssocProdCasa" />
+        </set>
+    </class>
+</hibernate-mapping>

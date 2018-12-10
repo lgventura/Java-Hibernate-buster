@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 17/11/2017 01:21:44 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="controller.TblAssocProdServ" table="`tbl_assoc_prod-serv`" catalog="projeto" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="estoque" class="controller.Estoque" fetch="select">
+            <column name="estoque_id_estoque" not-null="true" />
+        </many-to-one>
+        <many-to-one name="servico" class="controller.Servico" fetch="select">
+            <column name="servico_id_servico" not-null="true" />
+        </many-to-one>
+        <property name="quantidade" type="double">
+            <column name="quantidade" precision="22" scale="0" not-null="true" />
+        </property>
+        <property name="valor" type="double">
+            <column name="valor" precision="22" scale="0" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

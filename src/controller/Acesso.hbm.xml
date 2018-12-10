@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 17/11/2017 01:21:44 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="controller.Acesso" table="acesso" catalog="projeto" optimistic-lock="version">
+        <id name="idAcesso" type="java.lang.Integer">
+            <column name="id_acesso" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="colaborador" class="controller.Colaborador" fetch="select">
+            <column name="colaborador_id_colaborador" not-null="true" />
+        </many-to-one>
+        <property name="nivelAcesso" type="string">
+            <column name="nivelAcesso" length="45" />
+        </property>
+    </class>
+</hibernate-mapping>

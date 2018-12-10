@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 17/11/2017 01:21:44 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="controller.Fornecedor" table="fornecedor" catalog="projeto" optimistic-lock="version">
+        <id name="idFornecedor" type="java.lang.Integer">
+            <column name="id_fornecedor" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="endereco" class="controller.Endereco" fetch="select">
+            <column name="endereco_id" not-null="true" />
+        </many-to-one>
+        <property name="razaoSocial" type="string">
+            <column name="razao_social" length="45" not-null="true" />
+        </property>
+        <property name="nomeFantasia" type="string">
+            <column name="nome_fantasia" length="45" />
+        </property>
+        <property name="email" type="string">
+            <column name="email" length="45" />
+        </property>
+        <property name="cnpjCpf" type="string">
+            <column name="cnpj_cpf" length="20" not-null="true" />
+        </property>
+        <property name="telefone" type="string">
+            <column name="telefone" length="20" />
+        </property>
+        <property name="responsavel" type="string">
+            <column name="responsavel" length="45" not-null="true" />
+        </property>
+        <set name="pedidoCompras" table="pedido_compra" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="fornecedor_id" not-null="true" />
+            </key>
+            <one-to-many class="controller.PedidoCompra" />
+        </set>
+    </class>
+</hibernate-mapping>

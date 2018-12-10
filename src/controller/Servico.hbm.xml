@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 17/11/2017 01:21:44 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="controller.Servico" table="servico" catalog="projeto" optimistic-lock="version">
+        <id name="idServico" type="java.lang.Integer">
+            <column name="id_servico" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="tipoServico" class="controller.TipoServico" fetch="select">
+            <column name="tipo_servico_id" not-null="true" />
+        </many-to-one>
+        <property name="nomeServico" type="string">
+            <column name="nome_servico" length="45" not-null="true" />
+        </property>
+        <property name="tempoExec" type="int">
+            <column name="tempo_exec" not-null="true" />
+        </property>
+        <property name="valorServ" type="java.lang.Double">
+            <column name="valor_serv" precision="22" scale="0" />
+        </property>
+        <property name="valorTotal" type="java.lang.Double">
+            <column name="valor_total" precision="22" scale="0" />
+        </property>
+        <property name="semProduto" type="java.lang.Integer">
+            <column name="sem_produto" />
+        </property>
+        <set name="tblAssocProdServs" table="`tbl_assoc_prod-serv`" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="servico_id_servico" not-null="true" />
+            </key>
+            <one-to-many class="controller.TblAssocProdServ" />
+        </set>
+        <set name="tblAssosiativaServicoses" table="tbl_assosiativa_servicos" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="servico_id_servico" not-null="true" />
+            </key>
+            <one-to-many class="controller.TblAssosiativaServicos" />
+        </set>
+        <set name="agendamentos" table="agendamento" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="servico_id_servico" />
+            </key>
+            <one-to-many class="controller.Agendamento" />
+        </set>
+    </class>
+</hibernate-mapping>

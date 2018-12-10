@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 17/11/2017 01:21:44 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="controller.TipoServico" table="tipo_servico" catalog="projeto" optimistic-lock="version">
+        <id name="idTipo" type="java.lang.Integer">
+            <column name="id_tipo" />
+            <generator class="identity" />
+        </id>
+        <property name="nomeTipo" type="string">
+            <column name="nome_tipo" length="45" />
+        </property>
+        <set name="tblAssosiativaServicoses" table="tbl_assosiativa_servicos" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="tipo_servico_id_tipo" not-null="true" />
+            </key>
+            <one-to-many class="controller.TblAssosiativaServicos" />
+        </set>
+        <set name="servicoTerceiros" table="servico_terceiro" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="tipo_servico_id" not-null="true" />
+            </key>
+            <one-to-many class="controller.ServicoTerceiro" />
+        </set>
+        <set name="servicos" table="servico" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="tipo_servico_id" not-null="true" />
+            </key>
+            <one-to-many class="controller.Servico" />
+        </set>
+    </class>
+</hibernate-mapping>

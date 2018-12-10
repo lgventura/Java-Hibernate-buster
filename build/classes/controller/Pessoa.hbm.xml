@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 17/11/2017 01:21:44 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="controller.Pessoa" table="pessoa" catalog="projeto" optimistic-lock="version">
+        <id name="idPessoa" type="java.lang.Integer">
+            <column name="id_pessoa" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="endereco" class="controller.Endereco" fetch="select">
+            <column name="endereco_id" not-null="true" />
+        </many-to-one>
+        <property name="nome" type="string">
+            <column name="nome" length="60" not-null="true" />
+        </property>
+        <property name="rg" type="string">
+            <column name="rg" length="20" />
+        </property>
+        <property name="cpfCnpj" type="string">
+            <column name="cpf_cnpj" length="20" not-null="true" />
+        </property>
+        <property name="telefone" type="string">
+            <column name="telefone" length="23" not-null="true" />
+        </property>
+        <property name="observacoes" type="string">
+            <column name="Observacoes" />
+        </property>
+        <set name="clientes" table="cliente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="pessoa_id_pessoa" not-null="true" />
+            </key>
+            <one-to-many class="controller.Cliente" />
+        </set>
+        <set name="colaboradors" table="colaborador" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="pessoa_id_pessoa" not-null="true" />
+            </key>
+            <one-to-many class="controller.Colaborador" />
+        </set>
+        <set name="terceiros" table="terceiro" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="pessoa_id_pessoa" not-null="true" />
+            </key>
+            <one-to-many class="controller.Terceiro" />
+        </set>
+    </class>
+</hibernate-mapping>

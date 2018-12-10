@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 17/11/2017 01:21:44 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="controller.Produto" table="produto" catalog="projeto" optimistic-lock="version">
+        <id name="idProduto" type="java.lang.Integer">
+            <column name="id_produto" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="categoriaProduto" class="controller.CategoriaProduto" fetch="select">
+            <column name="categoria_produto_id" not-null="true" />
+        </many-to-one>
+        <many-to-one name="pedidoCompra" class="controller.PedidoCompra" fetch="select">
+            <column name="pedido_compra_id" not-null="true" />
+        </many-to-one>
+        <property name="nome" type="string">
+            <column name="nome" length="45" not-null="true" />
+        </property>
+        <property name="fabricante" type="string">
+            <column name="fabricante" length="45" not-null="true" />
+        </property>
+        <property name="valorCompra" type="double">
+            <column name="valor_compra" precision="22" scale="0" not-null="true" />
+        </property>
+        <property name="valorVenda" type="double">
+            <column name="valor_venda" precision="22" scale="0" not-null="true" />
+        </property>
+        <property name="unidadeDeMedida" type="int">
+            <column name="unidade_de_medida" not-null="true" />
+        </property>
+        <property name="quantidade" type="double">
+            <column name="quantidade" precision="22" scale="0" not-null="true" />
+        </property>
+        <property name="dataValidade" type="date">
+            <column name="data_validade" length="10" not-null="true" />
+        </property>
+        <property name="observacoes" type="string">
+            <column name="Observacoes" />
+        </property>
+        <property name="SPedido" type="byte">
+            <column name="s_pedido" not-null="true" />
+        </property>
+        <property name="transacao" type="java.lang.Integer">
+            <column name="transacao" />
+        </property>
+        <property name="valorTotal" type="double">
+            <column name="valor_total" precision="22" scale="0" not-null="true" />
+        </property>
+        <property name="quantidadeMedida" type="double">
+            <column name="quantidade_medida" precision="22" scale="0" not-null="true" />
+        </property>
+        <set name="estoques" table="estoque" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="produto_id" not-null="true" />
+            </key>
+            <one-to-many class="controller.Estoque" />
+        </set>
+    </class>
+</hibernate-mapping>

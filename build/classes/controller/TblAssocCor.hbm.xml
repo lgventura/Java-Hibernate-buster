@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 17/11/2017 01:21:44 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="controller.TblAssocCor" table="tbl_assoc_cor" catalog="projeto" optimistic-lock="version">
+        <composite-id name="id" class="controller.TblAssocCorId">
+            <key-property name="corFioIdCor" type="int">
+                <column name="cor_fio_id_cor" />
+            </key-property>
+            <key-property name="fichaIdFicha" type="int">
+                <column name="ficha_id_ficha" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="corFio" class="controller.CorFio" update="false" insert="false" fetch="select">
+            <column name="cor_fio_id_cor" not-null="true" />
+        </many-to-one>
+        <many-to-one name="ficha" class="controller.Ficha" update="false" insert="false" fetch="select">
+            <column name="ficha_id_ficha" not-null="true" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>

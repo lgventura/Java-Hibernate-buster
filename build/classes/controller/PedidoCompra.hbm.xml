@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 17/11/2017 01:21:44 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="controller.PedidoCompra" table="pedido_compra" catalog="projeto" optimistic-lock="version">
+        <id name="idPedido" type="java.lang.Integer">
+            <column name="id_pedido" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="fornecedor" class="controller.Fornecedor" fetch="select">
+            <column name="fornecedor_id" not-null="true" />
+        </many-to-one>
+        <property name="nomeProduto" type="string">
+            <column name="nome_produto" length="45" not-null="true" />
+        </property>
+        <property name="valorPedido" type="double">
+            <column name="valor_pedido" precision="22" scale="0" not-null="true" />
+        </property>
+        <property name="dataPedido" type="date">
+            <column name="data_pedido" length="10" not-null="true" />
+        </property>
+        <property name="transacao" type="int">
+            <column name="transacao" not-null="true" />
+        </property>
+        <property name="quantidade" type="double">
+            <column name="quantidade" precision="22" scale="0" not-null="true" />
+        </property>
+        <property name="valorUnitario" type="double">
+            <column name="valor_unitario" precision="22" scale="0" not-null="true" />
+        </property>
+        <property name="status" type="int">
+            <column name="status" not-null="true" />
+        </property>
+        <set name="produtos" table="produto" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="pedido_compra_id" not-null="true" />
+            </key>
+            <one-to-many class="controller.Produto" />
+        </set>
+    </class>
+</hibernate-mapping>

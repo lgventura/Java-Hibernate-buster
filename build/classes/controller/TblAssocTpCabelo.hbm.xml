@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 17/11/2017 01:21:44 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="controller.TblAssocTpCabelo" table="tbl_assoc_tp_cabelo" catalog="projeto" optimistic-lock="version">
+        <composite-id name="id" class="controller.TblAssocTpCabeloId">
+            <key-property name="tipoCabeloIdTipo" type="int">
+                <column name="tipo_cabelo_id_tipo" />
+            </key-property>
+            <key-property name="fichaIdFicha" type="int">
+                <column name="ficha_id_ficha" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="ficha" class="controller.Ficha" update="false" insert="false" fetch="select">
+            <column name="ficha_id_ficha" not-null="true" />
+        </many-to-one>
+        <many-to-one name="tipoCabelo" class="controller.TipoCabelo" update="false" insert="false" fetch="select">
+            <column name="tipo_cabelo_id_tipo" not-null="true" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>

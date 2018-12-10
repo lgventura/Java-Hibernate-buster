@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 17/11/2017 01:21:44 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="controller.Cliente" table="cliente" catalog="projeto" optimistic-lock="version">
+        <id name="idCliente" type="java.lang.Integer">
+            <column name="id_cliente" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="pessoa" class="controller.Pessoa" fetch="select">
+            <column name="pessoa_id_pessoa" not-null="true" />
+        </many-to-one>
+        <property name="idade" type="int">
+            <column name="idade" not-null="true" />
+        </property>
+        <property name="sexo" type="string">
+            <column name="sexo" length="45" />
+        </property>
+        <property name="alergia" type="byte">
+            <column name="alergia" not-null="true" />
+        </property>
+        <property name="descricaoAlergia" type="string">
+            <column name="descricao_alergia" />
+        </property>
+        <set name="agendamentos" table="agendamento" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="cliente_id_cliente" not-null="true" />
+            </key>
+            <one-to-many class="controller.Agendamento" />
+        </set>
+        <set name="tblAssocCliAgendas" table="tbl_assoc_cli_agenda" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="cliente_id_cliente" not-null="true" />
+            </key>
+            <one-to-many class="controller.TblAssocCliAgenda" />
+        </set>
+        <set name="fichas" table="ficha" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="cliente_id_cliente" not-null="true" />
+            </key>
+            <one-to-many class="controller.Ficha" />
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 17/11/2017 01:21:44 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="controller.ServicoTerceiro" table="servico_terceiro" catalog="projeto" optimistic-lock="version">
+        <id name="idServicoT" type="java.lang.Integer">
+            <column name="id_servico_t" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="terceiro" class="controller.Terceiro" fetch="select">
+            <column name="terceiro_id" not-null="true" />
+        </many-to-one>
+        <many-to-one name="tipoServico" class="controller.TipoServico" fetch="select">
+            <column name="tipo_servico_id" not-null="true" />
+        </many-to-one>
+        <property name="nomeServico" type="string">
+            <column name="nome_servico" length="45" not-null="true" />
+        </property>
+        <property name="tempoExec" type="int">
+            <column name="tempo_exec" not-null="true" />
+        </property>
+        <property name="valorServ" type="java.lang.Double">
+            <column name="valor_serv" precision="22" scale="0" />
+        </property>
+        <property name="descricao" type="string">
+            <column name="descricao" />
+        </property>
+        <set name="agendamentos" table="agendamento" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="servico_terceiro_id" />
+            </key>
+            <one-to-many class="controller.Agendamento" />
+        </set>
+    </class>
+</hibernate-mapping>
